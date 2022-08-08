@@ -15,23 +15,23 @@ public class EmployeePayrollService {
 
         ArrayList<EmployeePayrollData> payrollList = new ArrayList<>();
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(payrollList);
-        employeePayrollService.writeData();
-        employeePayrollService.readData();
+        employeePayrollService.readEmployeePayrollData();
+        employeePayrollService.writeEmployeePayrollData();
 
     }
-    public void writeData(){
+    public void readEmployeePayrollData(){
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Employee id");
+        System.out.print("Enter Employee Id :- ");
         int id = scanner.nextInt();
-        System.out.println("Enter Employee name");
+        System.out.print("Enter Employee Name :- ");
         String name = scanner.next();
-        System.out.println("Enter Employee Salary");
+        System.out.print("Enter Employee Salary :- ");
         double salary = scanner.nextDouble();
 
         employeePayrollList.add(new EmployeePayrollData(id, name, salary));
     }
-    public void readData(){
+    public void writeEmployeePayrollData(){
 
         Iterator iterator = employeePayrollList.iterator();
         while ( iterator.hasNext() ){
