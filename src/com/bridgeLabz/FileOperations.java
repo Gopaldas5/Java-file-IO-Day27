@@ -1,34 +1,57 @@
 package com.bridgeLabz;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 public class FileOperations {
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws IOException {
+        // Code to create a new file
 
-        File fileName = new File("gopal5.txt");
-        System.out.println(fileName.exists());
-        fileName.createNewFile();
-        System.out.println("Check file is exists or not :- " + fileName.exists());
+        File myFile = new File("firstFile.txt");
+        try {
+            myFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Unable to create this file");
+            e.printStackTrace();
+        }
 
-        fileName.delete();
-        System.out.println("Delete File and Check File Not Exist :-" + fileName.exists());
+        // Code to write to a file
+        try {
+            FileWriter fileWriter = new FileWriter("firstFile.txt");
+            fileWriter.write("This is our first file from this java io\nOkay now bye");
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        fileName.mkdir();
-        System.out.println("Check file directory :- " +fileName.exists());
+        // Reading a file
+        File myFile2 = new File("firstFile.txt");
+        try {
+            Scanner sc = new Scanner(myFile);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                System.out.println(line);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-//        Files.createDirectory("gopalIO");
-//        Files.exists("gopalIO");
-
-        File fileName2 = new File("abc.txt");
-        fileName2.createNewFile();
-        System.out.println("creating a empty file :- "+fileName2.exists());
-
-       // Files.list(Path.of("gopal-IO")).filter(Files::isRegularFile).forEach(System.out::println);
-       // Files.newDirectoryStream("gopalIO").forEach(System.out::println);
+        // Deleting a file
+        File myFile3 = new File("abc.txt");
+        if (myFile3.delete()) {
+            System.out.println("I have deleted: " + myFile.getName());
+        } else {
+            System.out.println("Some problem occurred while deleting the file");
+        }
 
     }
+
 }
+
